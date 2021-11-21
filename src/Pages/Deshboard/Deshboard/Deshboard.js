@@ -15,22 +15,14 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import DeshboardHome from '../DeshboardHome/DeshboardHome';
-import AdDoctor from '../AdDoctor/AdDoctor';
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
-  useParams,
-  useRouteMatch
+  Outlet,
+  
 } from "react-router-dom";
-import MakeAdmin from './MakeAdmin/MakeAdmin';
 import { Button } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
-import AdminRoute from '../../Login/Login/AdminRoute/AdminRoute';
-import Payment from '../Payment/Payment';
 
 
 const drawerWidth = 240;
@@ -38,7 +30,7 @@ const drawerWidth = 240;
 function Deshboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  let { path, url } = useRouteMatch();
+  
   const {admin} = useAuth();
 
   const handleDrawerToggle = () => {
@@ -50,13 +42,13 @@ function Deshboard(props) {
       <Toolbar />
       <Divider /> <br />
       <Link to='/appointment' style={{textDecoration: 'none'}}> <Button variant="contained">Appointment</Button></Link> <br /> <br />
-      <Link to={`${url}`}style={{textDecoration: 'none'}}><Button variant="contained">Deshboard</Button></Link> <br /> <br />
+      <Link to="/deshboard"style={{textDecoration: 'none'}}><Button variant="contained">Deshboard</Button></Link> <br /> <br />
 
       {admin &&
        <Box>
-      <Link to={`${url}/makeAdmin`}style={{textDecoration: 'none'}}>  <Button variant="contained">Make Admin</Button></Link><br /> <br />
+      <Link to={`/deshboard/makeAdmin`}style={{textDecoration: 'none'}}>  <Button variant="contained">Make Admin</Button></Link><br /> <br />
 
-      <Link to={`${url}/adDoctor`}style={{textDecoration: 'none'}}> <Button variant="contained">Ad Doctor</Button></Link> <br /><br />  
+      <Link to={`/deshboard/adDoctor`}style={{textDecoration: 'none'}}> <Button variant="contained">Ad Doctor</Button></Link> <br /><br />  
       </Box>}
       
       <Divider />
@@ -138,20 +130,7 @@ function Deshboard(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <Switch>
-        <Route exact path={path}>
-          <DeshboardHome></DeshboardHome>
-        </Route>
-        <Route  path={`${path}/payment/:appointmentId`}>
-          <Payment></Payment>
-        </Route>
-        <AdminRoute path={`${path}/makeAdmin`}>
-          <MakeAdmin></MakeAdmin>
-        </AdminRoute>
-        <AdminRoute path={`${path}/adDoctor`}>
-          <AdDoctor></AdDoctor>
-        </AdminRoute>
-      </Switch>
+        <Outlet></Outlet>
       </Box>
     </Box>
   );

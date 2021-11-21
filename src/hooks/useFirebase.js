@@ -17,7 +17,7 @@ const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 
 
-const regUser = (email, password, name, histroy) => {
+const regUser = (email, password, name, navigate) => {
   setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -35,7 +35,7 @@ const regUser = (email, password, name, histroy) => {
         }).catch((error) => {
           
         });
-        histroy.replace('/')
+        navigate('/')
         
       })
       .catch((error) => {
@@ -47,12 +47,12 @@ const regUser = (email, password, name, histroy) => {
       .finally(()=> setIsLoading(false));
 }
 
-const loginUser = (email, password, location, history) => {
+const loginUser = (email, password, location, navigate) => {
   setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const destination = location?.state?.from || '/'
-      history.replace(destination);
+      navigate(destination);
       setError('');
     })
     .catch((error) => {
@@ -61,7 +61,7 @@ const loginUser = (email, password, location, history) => {
     .finally(()=> setIsLoading(false));
 }
 
-const googleSignin = (location, history) => {
+const googleSignin = (location, navigate) => {
   setIsLoading(true);
     signInWithPopup(auth, googleProvider)
     .then((result) => {
