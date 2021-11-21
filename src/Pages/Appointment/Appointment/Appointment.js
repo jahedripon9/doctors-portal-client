@@ -9,7 +9,7 @@ const Appointment = () => {
     const [date, setDate] = React.useState(new Date());
     return (
         <div>
-            <Navigation></Navigation>
+            {/* <Navigation></Navigation> */}
             <AppointmentDoctor date={date} setDate={setDate}></AppointmentDoctor>
             <AvailableAppointment date={date}></AvailableAppointment>
         </div>

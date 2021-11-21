@@ -22,7 +22,7 @@ const style = {
 
 
 const BookingAppointment = ({openBooking, handleBookingClose, booking, date, setBookingSuccess}) => {
-    const {name, time} = booking;
+    const {name, time, price} = booking;
     const{user}=useAuth();
     const initialInfo = {patientName: user.displayName, email: user.email, phone: ''}
     const [bookingInfo, setBookingInfo] = useState(initialInfo);
@@ -42,11 +42,12 @@ const BookingAppointment = ({openBooking, handleBookingClose, booking, date, set
       const appointment = {
         ...bookingInfo,
         time,
+        price,
         serviceName: name,
         date: date.toLocaleDateString()
       }
       // send to the Server
-      fetch('http://localhost:5000/appointments', {
+      fetch('https://thawing-retreat-53148.herokuapp.com/appointments', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'

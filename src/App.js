@@ -12,12 +12,14 @@ import Login from "./Pages/Login/Login/Login";
 import PrivetRoute from "./Pages/Login/PrivetRoute/PrivetRoute";
 
 import Register from "./Pages/Login/Register/Register";
+import Navigation from "./Pages/Shared/Navigation/Navigation";
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
       <Router>
+      <Navigation></Navigation>
         <Switch>
           <PrivetRoute path='/appointment'>
             <Appointment />

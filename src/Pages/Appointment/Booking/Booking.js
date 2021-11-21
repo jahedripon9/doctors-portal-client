@@ -3,7 +3,7 @@ import React from 'react';
 import BookingAppointment from '../BookingAppointment/BookingAppointment';
 
 const Booking = ({booking, date, setBookingSuccess}) => {
-    const {name, time, space} = booking;
+    const {name, time, space, price} = booking;
 
     const [openBooking, setOpenBooking] = React.useState(false);
     const handleBookingOpen = () => setOpenBooking(true);
@@ -20,6 +20,9 @@ const Booking = ({booking, date, setBookingSuccess}) => {
                 </Typography>  
                 <Typography variant="p" gutterBottom component="div">
                     {space} Space Available
+                </Typography>  
+                <Typography variant="p" gutterBottom component="div">
+                    Price ${price} 
                 </Typography>  
                 <Button onClick={handleBookingOpen} style={{background:'#00cec9'}} variant="contained">Book Appointment</Button>
                 </Paper>       
